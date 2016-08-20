@@ -1,0 +1,37 @@
+{
+  "name": "bugsy",
+  "version": "0.0.1",
+  "description": "Collection of helpers to deal with errors in Node.js",
+  "author": "Nicolas Jakob <nicow.jakob@gmail.com>",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "homepage": "https://github.com/njakob/bugsy",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/njakob/bugsy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/njakob/bugsy/issues"
+  },
+  "files": [
+    "lib/index.js"
+  ],
+  "keywords": [
+    "bug",
+    "error",
+    "exception",
+    "handler",
+    "transform",
+    "backend",
+    "api"
+  ],
+  "scripts": {
+    "test": "make test"
+  },
+  "devDependencies": {
+    "istanbul": "0.4.4",
+    "koa": "2.0.0",
+    "mocha": "2.5.3",
+    "should": "10.0.0"
+  }
+}

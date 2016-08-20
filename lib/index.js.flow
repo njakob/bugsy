@@ -1,0 +1,34 @@
+"use strict";
+
+declare var LEVELS_SYSLOG: {
+  EMERGENCY: string,
+  ALERT: string,
+  CRITICAL: string,
+  ERROR: string,
+  WARNING: string,
+  NOTICE: string,
+  INFORMATIONAL: string,
+  DEBUG: string
+};
+
+declare type CreateOptions = {
+  level?: string;
+  code?: string;
+  inherits?: Function;
+};
+
+declare function create(name: string, message: string, options?: CreateOptions): Class<Error>;
+
+declare class Branch {
+  drop(): this;
+  transform(fn: (err: Error) => void): this;
+  reduce(fn: (value: ?any, err: Error) => void): this;
+}
+
+declare function instanceOf(value: Class<Error>): Branch;
+declare function code(value: Class<Error>): Branch;
+declare function always(value: Class<Error>): Branch;
+
+declare function handle(fn: Function, branches: Branch[]): void;
+
+declare function reduce<T>(err: Error, branches: Branch[]): T;
