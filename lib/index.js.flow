@@ -1,6 +1,6 @@
-"use strict";
+// @flow
 
-declare var LEVELS_SYSLOG: {
+declare export var LEVELS_SYSLOG: {
   EMERGENCY: string,
   ALERT: string,
   CRITICAL: string,
@@ -11,24 +11,28 @@ declare var LEVELS_SYSLOG: {
   DEBUG: string
 };
 
-declare type CreateOptions = {
+type bugsy$CreateOptions = {
   level?: string;
   code?: string;
   inherits?: Function;
 };
 
-declare function create(name: string, message: string, options?: CreateOptions): Class<Error>;
+export type CreateOptions = bugsy$CreateOptions;
 
-declare class Branch {
+declare export function create(name: string, message: string, options?: CreateOptions): Class<Error>;
+
+declare class bugsy$Branch {
   drop(): this;
   transform(fn: (err: Error) => void): this;
   reduce(fn: (value: ?any, err: Error) => void): this;
 }
 
-declare function instanceOf(value: Class<Error>): Branch;
-declare function code(value: Class<Error>): Branch;
-declare function always(value: Class<Error>): Branch;
+declare export class Branch extends bugsy$Branch {};
 
-declare function handle(fn: Function, branches: Branch[]): void;
+declare export function instanceOf(value: Class<Error>): Branch;
+declare export function code(value: Class<Error>): Branch;
+declare export function always(value: Class<Error>): Branch;
 
-declare function reduce<T>(err: Error, branches: Branch[]): T;
+declare export function handle(fn: Function, branches: Branch[]): void;
+
+declare export function reduce<T>(err: Error, branches: Branch[]): T;

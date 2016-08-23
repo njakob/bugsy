@@ -14,7 +14,8 @@
     "url": "https://github.com/njakob/bugsy/issues"
   },
   "files": [
-    "lib/index.js"
+    "lib/index.js",
+    "lib/index.js.flow"
   ],
   "keywords": [
     "bug",
