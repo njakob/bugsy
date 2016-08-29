@@ -1,6 +1,6 @@
 {
   "name": "bugsy",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Collection of helpers to deal with errors in Node.js",
   "author": "Nicolas Jakob <nicow.jakob@gmail.com>",
   "main": "lib/index.js",
