@@ -21,17 +21,17 @@ function show(fn) {
     } else {
       console.log('Value: ' + value);
     }
-  } catch (err) {
+  } catch (error) {
     var str = '';
-    if (err.level) {
-      str += '[' + err.level + '] '
+    if (error.level) {
+      str += '[' + error.level + '] '
     }
-    str += err.name || 'Error';
-    if (err.message) {
-      str += ': ' + err.message;
+    str += error.name || 'Error';
+    if (error.message) {
+      str += ': ' + error.message;
     }
     str += '\n';
-    str += err.stack.split('\n').splice(1).join('\n');
+    str += error.stack.split('\n').splice(1).join('\n');
     console.log(str);
   }
 }
@@ -47,10 +47,17 @@ show(function() {
 });
 
 function h1(fn) {
-  bugsy.transform(fn, [
-    bugsy.instanceOf(SystemError).transform(function (err) { err.level = bugsy.LEVELS_SYSLOG.ALERT }),
-    bugsy.code(CODES.MISSING_FILE).drop()
-  ]);
+  try {
+    fn();
+  } catch (error) {
+    switch (true) {
+      case bugsy.instanceOf(error, SystemError):
+        error.level = bugsy.LEVELS_SYSLOG.ALERT;
+        throw error;
+      case bugsy.withCode(error, SystemError):
+        break;
+    }
+  }
 }
 
 show(function() {
@@ -72,15 +79,4 @@ show(function() {
   h1(function() {
     throw new MissingFileError();
   });
-});
-
-function r1(err) {
-  return bugsy.reduce(err, [
-    bugsy.instanceOf(UnauthorizedError).reduce(function () { return 401; })
-  ], 500);
-}
-
-show(function () {
-  console.log("Generate an unauthorized error where a reducer return 401");
-  return r1(new UnauthorizedError());
 });

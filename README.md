@@ -12,8 +12,7 @@ their lifecycle.
 
 * Inheritance management
 * Error severity support
-* Matching transformations
-* Flow definition
+* Flowtype definition
 
 ## Installation
 
@@ -47,12 +46,17 @@ function capture() {
   }
 }
 
-bugsy.transform(() => {
+try {
   capture();
-}, [
-  bugsy.code('missed_throw').drop(),
-  bugsy.instanceOf(RanAwayError).transform(err => err.level = bugsy.LEVELS_SYSLOG.EMERGENCY)
-]);
+} catch (error) {
+  switch (true) {
+    case bugsy.withCode(error, 'missed_throw'):
+      break;
+    case bugsy.instanceOf(error, RanAwayError):
+      error.level = bugsy.LEVELS_SYSLOG.EMERGENCY;
+      throw error;
+  }
+}
 ```
 
 ## Licences

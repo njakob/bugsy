@@ -19,20 +19,24 @@ type bugsy$CreateOptions = {
 
 export type CreateOptions = bugsy$CreateOptions;
 
-declare export function create(name: string, message: string, options?: CreateOptions): Class<Error>;
+export type BaseError<T> = Error & {
+  level: ?string;
+  code: ?string;
+  meta: ?T;
+};
 
-declare class bugsy$Branch {
-  drop(): this;
-  transform(fn: (err: Error) => void): this;
-  reduce(fn: (value: ?any, err: Error) => void): this;
-}
+declare export function create<T>(name: string, message: string, options?: CreateOptions): Class<BaseError<T>>;
 
-declare export class Branch extends bugsy$Branch {};
+declare export class AggregateError extends Array {};
 
-declare export function instanceOf(value: Class<Error>): Branch;
-declare export function code(value: Class<Error>): Branch;
-declare export function always(value: Class<Error>): Branch;
+type bugsy$Reducer = (error: any) => ?number;
 
-declare export function handle(fn: Function, branches: Branch[]): void;
+export type Reducer = bugsy$Reducer;
 
-declare export function reduce<T>(err: Error, branches: Branch[]): T;
+declare export function composeReducers(...reducers: Reducer[]): ?number;
+declare export function reduce<T: Function>(reduces: Reducer[], fn: T): T;
+
+declare export function withCode(error: any, code: any): boolean;
+declare export function everyWithCode(error: any, code: any): boolean;
+declare export function instanceOf(error: any, code: any): boolean;
+declare export function everyInstanceOf(error: any, code: any): boolean;
