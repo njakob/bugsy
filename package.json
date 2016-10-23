@@ -32,6 +32,9 @@
     "lint": "eslint --fix .",
     "flow": "flow check",
     "test": "npm run lint && npm run flow && npm run compile && mocha --compilers js:babel-core/register 'src/**/tests/**/*.js'",
+    "bump-major": "npm version major -m \"Bump to %s\"",
+    "bump-minor": "npm version minor -m \"Bump to %s\"",
+    "bump-patch": "npm version patch -m \"Bump to %s\"",
     "prepublish": "npm run test"
   },
   "devDependencies": {
