@@ -27,7 +27,6 @@
     "api"
   ],
   "scripts": {
-    "test": "make test"
   },
   "devDependencies": {
     "istanbul": "0.4.4",
