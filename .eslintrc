@@ -1,0 +1,8 @@
+{
+  "extends": [
+    "njakob",
+    "njakob/babel",
+    "njakob/node",
+    "njakob/flow"
+  ]
+}
