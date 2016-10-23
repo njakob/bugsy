@@ -1,6 +1,8 @@
 
 # bugsy
 
+[![NPM version][npm-status-image]][npm]
+
 Collection of helpers to deal with errors.
 
 Dealing with errors is a common problem in every kind of
@@ -10,13 +12,13 @@ their lifecycle.
 
 ## Features
 
-* Inheritance management
+* Isomorphic module
 * Error severity support
-* Flowtype definition
+* Flowtype support
 
 ## Installation
 
-[![NPM](https://nodei.co/npm/bugsy.png?downloads=true)](https://nodei.co/npm/bugsy/)
+[![NPM][npm-install-image]][npm]
 
 ```
 $ npm install bugsy
@@ -27,38 +29,49 @@ $ npm install bugsy
 ```javascript
 import * as bugsy from 'bugsy';
 
-const RanAwayError = bugsy.create(
-  'RanAwayError',
-  'It ran away, again',
-  { code: 'ran_away' }
-);
-const MissedThrowError = bugsy.create(
-  'MissedThrowError',
-  'Throw totally missed',
-  { code: 'missed_throw' }
-);
+const CODE_RAN_AWAY = 'ran_away';
+const CODE_THROW_MISSED = 'throw_missed';
+
+const RanAwayError = bugsy.newError(CODE_RAN_AWAY, 'It ran away, again');
+const ThrowMissedError = bugsy.newError(CODE_THROW_MISSED, 'Throw totally missed');
 
 function capture() {
   if (Math.random() > 0.9) {
-    throw new MissedThrowError();
+    throw new ThrowMissedError({ severity: bugsy.SYSLOG_WARNING });
   } else {
-    throw new RanAwayError({ meta: 'Caterpie' }); 
+    throw new RanAwayError();
   }
 }
 
-try {
-  capture();
-} catch (error) {
-  switch (true) {
-    case bugsy.withCode(error, 'missed_throw'):
-      break;
-    case bugsy.instanceOf(error, RanAwayError):
-      error.level = bugsy.LEVELS_SYSLOG.EMERGENCY;
-      throw error;
+function handler(fn) {
+  try {
+    fn();
+  } catch (err) {
+    console.log(bugsy.toString(err));
   }
 }
+
+handler(() => {
+  try {
+    capture();
+  } catch (err) {
+    switch (true) {
+      case err.code === CODE_THROW_MISSED:
+        break;
+      case err instanceof RanAwayError:
+        throw (err.addSeverity(bugsy.SYSLOG_EMERGENCY));
+      default:
+        throw err;
+    }
+  }
+});
 ```
 
 ## Licences
 
-[MIT](LICENSE)
+Bugsy is licensed under the [MIT License][licence].
+
+[licence]: LICENSE
+[npm]: https://nodei.co/npm/bugsy/
+[npm-install-image]: https://nodei.co/npm/bugsy.png?downloads=true
+[npm-status-image]: https://img.shields.io/npm/v/bugsy.svg
