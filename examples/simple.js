@@ -33,14 +33,14 @@ function e2() {
 }
 
 function e3() {
-  throw new UnexpectedAPIResponse('/api/test');
+  throw (new UnexpectedAPIResponse('/api/test')).addSeverity(bugsy.SYSLOG_NOTICE).addMeta({ acceptLanguage: 'fr-CH' });
 }
 
 function handle(fn) {
   try {
     fn();
   } catch (err) {
-    console.log(bugsy.toString(err));
+    console.log(bugsy.toString(err), err.meta);
   }
 }
 

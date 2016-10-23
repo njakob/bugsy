@@ -46,6 +46,7 @@ export function toString(err: {
 export class ExtendableError extends Error {
   code: string;
   severity: Severity;
+  meta: any;
 
   constructor(code: string, message: string, { severity = SYSLOG_ERROR }: { severity?: Severity; } = {}) {
     super();
@@ -53,6 +54,7 @@ export class ExtendableError extends Error {
     this.name = `${transform(code)}Error`;
     this.code = code;
     this.severity = severity;
+    this.meta = {};
     const error = new Error(message);
     error.name = this.name;
     const stack = error.stack.split('\n');
@@ -62,6 +64,14 @@ export class ExtendableError extends Error {
 
   addSeverity(value: Severity): this {
     this.severity = value;
+    return this;
+  }
+
+  addMeta(value: any): this {
+    this.meta = {
+      ...this.meta,
+      ...value
+    };
     return this;
   }
 
