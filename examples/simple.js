@@ -33,7 +33,7 @@ function e2() {
 }
 
 function e3() {
-  throw (new UnexpectedAPIResponse('/api/test')).addSeverity(bugsy.SYSLOG_NOTICE).addMeta({ acceptLanguage: 'fr-CH' });
+  throw (new UnexpectedAPIResponse('/api/test')).setSeverity(bugsy.SYSLOG_NOTICE).addMeta({ acceptLanguage: 'fr-CH' });
 }
 
 function handle(fn) {

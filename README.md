@@ -59,7 +59,7 @@ handler(() => {
       case err.code === CODE_THROW_MISSED:
         break;
       case err instanceof RanAwayError:
-        throw (err.addSeverity(bugsy.SYSLOG_EMERGENCY));
+        throw (err.setSeverity(bugsy.SYSLOG_EMERGENCY));
       default:
         throw err;
     }

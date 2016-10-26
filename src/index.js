@@ -62,7 +62,7 @@ export class ExtendableError extends Error {
     this.stack = stack.join('\n');
   }
 
-  addSeverity(value: Severity): this {
+  setSeverity(value: Severity): this {
     this.severity = value;
     return this;
   }
