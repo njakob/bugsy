@@ -1,8 +1,8 @@
 {
   "extends": [
-    "njakob",
-    "njakob/babel",
-    "njakob/node",
-    "njakob/flow"
-  ]
+    "njakob/es6-flow"
+  ],
+  "env": {
+    "browser": true
+  }
 }
