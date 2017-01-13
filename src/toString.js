@@ -8,20 +8,28 @@ export type ToStringOptions = {
 };
 
 export default function toString(err: IError, {
-  withDate = true
+  withDate = false,
 }: ToStringOptions = {}): string {
   const severity: Severity = err.severity || syslog.ERROR;
   const message: string = err.message || '';
   const code: string = err.code || err.name || 'Error';
 
-  let buf = '';
+  const chunks = [];
   if (withDate) {
-    buf += `${(new Date()).toISOString()} `;
+    chunks.push(`${(new Date()).toISOString()}`);
   }
-  buf += `[${severity}] `;
-  buf += `${code} `;
+  chunks.push(`[${severity}]`);
+  chunks.push(`${code}`);
   if (message) {
-    buf += message;
+    chunks.push(message);
+  }
+
+  let buf = '';
+  for (let i = 0; i < chunks.length; i += 1) {
+    if (i !== 0) {
+      buf += ' ';
+    }
+    buf += chunks[i];
   }
 
   return buf;
