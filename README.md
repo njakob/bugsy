@@ -3,15 +3,14 @@
 
 Collection of helpers to deal with errors.
 
-Dealing with errors is a common problem in every small or large
-project. While a lot of libraries simply focus on their
-creation, this library is meant to deal with their lifecycle.
+Dealing with errors is a common problem in every small or large project. While a lot of libraries simply focus on their creation, this library is meant to deal with their lifecycle.
 
 ## Features
 
 * Universal module
-* Error severity support
-* Flowtype support
+* Error severity
+* Custom metadata
+* Flowtype
 
 ## Installation
 
@@ -34,17 +33,21 @@ $ yarn add bugsy
 ```js
 import * as bugsy from 'bugsy';
 
-const CODE_RAN_AWAY = 'ran_away';
-const CODE_THROW_MISSED = 'throw_missed';
+const RAN_AWAY = 'ran_away';
+const THROW_MISSED = 'throw_missed';
 
-const RanAwayError = bugsy.newError(CODE_RAN_AWAY, 'It ran away, again');
-const ThrowMissedError = bugsy.newError(CODE_THROW_MISSED, 'Throw totally missed');
+const ranAway = bugsy.createError(RAN_AWAY, 'It ran away, again');
+const throwMissed = bugsy.createError(THROW_MISSED, 'Throw totally missed');
 
 function capture() {
-  if (Math.random() > 0.9) {
-    throw new ThrowMissedError({ severity: bugsy.SYSLOG_WARNING });
+  const r = Math.random();
+
+  if (r < 0.3) {
+    throw throwMissed({ severity: bugsy.SYSLOG_WARNING });
+  } else if (r < 0.6) {
+    throw ranAway();
   } else {
-    throw new RanAwayError();
+    throw new Error();
   }
 }
 
@@ -60,13 +63,14 @@ handler(() => {
   try {
     capture();
   } catch (err) {
-    switch (true) {
-      case err.code === CODE_THROW_MISSED:
+    switch (err.code) {
+      case THROW_MISSED:
+        console.log('Oh well...');
         break;
-      case err instanceof RanAwayError:
-        throw (err.setSeverity(bugsy.SYSLOG_EMERGENCY));
+      case RAN_AWAY:
+        throw err.setSeverity(bugsy.SYSLOG_CRITICAL).addMeta({ firstTry: true });
       default:
-        throw err;
+        throw bugsy.convert(err).setSeverity(bugsy.SYSLOG_EMERGENCY);
     }
   }
 });
