@@ -43,7 +43,7 @@ function capture() {
   const r = Math.random();
 
   if (r < 0.3) {
-    throw throwMissed({ severity: bugsy.SYSLOG_WARNING });
+    throw throwMissed({ severity: bugsy.syslog.WARNING });
   } else if (r < 0.6) {
     throw ranAway();
   } else {
@@ -68,9 +68,9 @@ handler(() => {
         console.log('Oh well...');
         break;
       case RAN_AWAY:
-        throw err.setSeverity(bugsy.SYSLOG_CRITICAL).addMeta({ firstTry: true });
+        throw err.setSeverity(bugsy.syslog.CRITICAL).addMeta({ firstTry: true });
       default:
-        throw bugsy.convert(err).setSeverity(bugsy.SYSLOG_EMERGENCY);
+        throw bugsy.convert(err).setSeverity(bugsy.syslog.EMERGENCY);
     }
   }
 });
