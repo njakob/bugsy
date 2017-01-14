@@ -11,7 +11,7 @@ export default function toString(err: IError, {
   withDate = false,
 }: ToStringOptions = {}): string {
   const severity: Severity = err.severity || syslog.ERROR;
-  const message: string = err.message || '';
+  const message: string = err.message;
   const code: string = err.code || err.name || 'Error';
 
   const chunks = [];

@@ -14,28 +14,46 @@ function createErrorName(code: string): string {
 }
 
 export type BugsyOptions = {
+  message: string;
+  name?: string;
+  code?: string;
   severity?: Severity;
+  stack?: string;
 };
 
 export default class Bugsy extends Error {
-  code: string;
+  code: ?string;
   severity: Severity;
   meta: any;
 
-  constructor(code: string, message: string, {
-    severity = syslog.ERROR
+  constructor({
+    code,
+    message,
+    stack,
+    name = 'Error',
+    severity = syslog.ERROR,
   }: BugsyOptions = {}) {
     super();
-    this.message = message;
-    this.name = createErrorName(code);
+
     this.code = code;
     this.severity = severity;
-    this.meta = {};
-    const error = new Error(message);
-    error.name = this.name;
-    const stack = error.stack.split('\n');
-    stack.splice(1, 2);
-    this.stack = stack.join('\n');
+    this.message = message;
+
+    if (typeof code !== 'undefined') {
+      this.name = createErrorName(code);
+    } else {
+      this.name = name;
+    }
+
+    if (typeof stack === 'undefined') {
+      const fake = new Error(message);
+      fake.name = this.name;
+      const buildStack = fake.stack.split('\n');
+      buildStack.splice(1, 2);
+      this.stack = buildStack.join('\n');
+    } else {
+      this.stack = stack;
+    }
   }
 
   setSeverity(value: Severity): this {

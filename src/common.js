@@ -3,8 +3,9 @@
 export type Severity = string;
 
 export type IError = {
-  name: ?string;
-  message: ?string;
+  name: string;
+  stack: string;
+  message: string;
   code?: string;
   severity?: Severity;
 };

@@ -2,6 +2,7 @@ import test from 'ava';
 import Bugsy from './Bugsy';
 import createError from './createError';
 import toString from './toString';
+import convert from './convert';
 import * as syslog from './syslog';
 import * as bugsy from '.';
 
@@ -30,5 +31,11 @@ test('export createError', (t) => {
 test('export toString', (t) => {
   t.truthy(bugsy.toString);
   t.is(bugsy.toString, toString);
+  t.pass();
+});
+
+test('export convert', (t) => {
+  t.truthy(bugsy.convert);
+  t.is(bugsy.convert, convert);
   t.pass();
 });
