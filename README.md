@@ -1,7 +1,7 @@
 
 # bugsy [![NPM version][npm-status-image]][npm] [![Build Status][build-status-image]][travis] [![ESLint Config][eslint-config-image]][eslint-config]
 
-Collection of helpers to deal with errors.
+Helper to deal with errors lifecycle in javascript.
 
 Dealing with errors is a common problem in every small or large project. While a lot of libraries simply focus on their creation, this library is meant to deal with their lifecycle.
 
