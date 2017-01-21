@@ -13,9 +13,6 @@
   "bugs": {
     "url": "https://github.com/njakob/bugsy/issues"
   },
-  "files": [
-    "lib"
-  ],
   "keywords": [
     "bug",
     "error",
