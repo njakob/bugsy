@@ -45,7 +45,7 @@
     "bump:major": "npm version major -m \"Bump to %s\"",
     "bump:minor": "npm version minor -m \"Bump to %s\"",
     "bump:patch": "npm version patch -m \"Bump to %s\"",
-    "prepublish": "npm run check"
+    "prepublish": "npm run check && npm run build"
   },
   "devDependencies": {
     "ava": "^0.17.0",
