@@ -2,6 +2,21 @@ import test from 'ava';
 import Bugsy from './Bugsy';
 import * as syslog from './syslog';
 
+test('create with metadata', (t) => {
+  const err = new Bugsy({ code: 'performance', message: 'High performance', meta: { style: 'cute' } });
+
+  t.deepEqual(err.meta, { style: 'cute' });
+  t.pass();
+});
+
+test('create a copy of metadata', (t) => {
+  const meta = { style: 'cute' };
+  const err = new Bugsy({ code: 'performance', message: 'High performance', meta });
+
+  t.not(err.meta, meta);
+  t.pass();
+});
+
 test('change severity', (t) => {
   const err = new Bugsy({ code: 'performance', message: 'High performance' });
 

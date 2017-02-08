@@ -19,6 +19,7 @@ export type BugsyOptions = {
   code?: string;
   severity?: Severity;
   stack?: string;
+  meta?: any;
 };
 
 export default class Bugsy extends Error {
@@ -32,12 +33,14 @@ export default class Bugsy extends Error {
     stack,
     name = 'Error',
     severity = syslog.ERROR,
+    meta = {},
   }: BugsyOptions = {}) {
     super();
 
     this.code = code;
     this.severity = severity;
     this.message = message;
+    this.meta = { ...meta };
 
     if (typeof code !== 'undefined') {
       this.name = createErrorName(code);
