@@ -43,7 +43,7 @@ function capture(name) {
   const r = Math.random();
 
   if (r < 0.3) {
-    throw throwMissed({ severity: bugsy.syslog.WARNING });
+    throw throwMissed();
   } else if (r < 0.6) {
     throw ranAway(name);
   } else {
