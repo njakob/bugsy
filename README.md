@@ -30,22 +30,22 @@ $ yarn add bugsy
 
 ## Usage
 
-```js
+```javascript
 import * as bugsy from 'bugsy';
 
 const RAN_AWAY = 'ran_away';
 const THROW_MISSED = 'throw_missed';
 
-const ranAway = bugsy.createError(RAN_AWAY, 'It ran away, again');
+const ranAway = bugsy.createDynamicError(RAN_AWAY, (name) => `${name} ran away, again`);
 const throwMissed = bugsy.createError(THROW_MISSED, 'Throw totally missed');
 
-function capture() {
+function capture(name) {
   const r = Math.random();
 
   if (r < 0.3) {
     throw throwMissed({ severity: bugsy.syslog.WARNING });
   } else if (r < 0.6) {
-    throw ranAway();
+    throw ranAway(name);
   } else {
     throw new Error();
   }
@@ -61,7 +61,7 @@ function handler(fn) {
 
 handler(() => {
   try {
-    capture();
+    capture('Abra');
   } catch (err) {
     switch (err.code) {
       case THROW_MISSED:

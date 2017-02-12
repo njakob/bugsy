@@ -3,6 +3,7 @@
 import test from 'ava';
 import Bugsy from './Bugsy';
 import createError from './createError';
+import createDynamicError from './createDynamicError';
 import toString from './toString';
 import convert from './convert';
 import * as syslog from './syslog';
@@ -27,6 +28,12 @@ test('export syslog constants', (t) => {
 test('export createError', (t) => {
   t.truthy(bugsy.createError);
   t.is(bugsy.createError, createError);
+  t.pass();
+});
+
+test('export createDynamicError', (t) => {
+  t.truthy(bugsy.createDynamicError);
+  t.is(bugsy.createDynamicError, createDynamicError);
   t.pass();
 });
 
