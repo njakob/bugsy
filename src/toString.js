@@ -1,25 +1,35 @@
 /* @flow */
 
-import type { IError, Severity } from './common';
+import Bugsy from './Bugsy';
+import type { Severity } from './common';
 import * as syslog from './syslog';
 
 export type ToStringOptions = {
   withDate: boolean;
 };
 
-export default function toString(err: IError, {
+export default function toString(err: Error, {
   withDate = false,
 }: ToStringOptions = {}): string {
-  const severity: Severity = err.severity || syslog.ERROR;
   const message: string = err.message;
-  const code: string = err.code || err.name || 'Error';
+
+  let severity: Severity;
+  let name: string;
+
+  if (err instanceof Bugsy) {
+    severity = err.severity;
+    name = err.code || err.name;
+  } else {
+    severity = syslog.ERROR;
+    name = err.name;
+  }
 
   const chunks = [];
   if (withDate) {
     chunks.push(`${(new Date()).toISOString()}`);
   }
   chunks.push(`[${severity}]`);
-  chunks.push(`${code}`);
+  chunks.push(`${name}`);
   if (message) {
     chunks.push(message);
   }

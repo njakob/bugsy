@@ -14,12 +14,12 @@ function createErrorName(code: string): string {
 }
 
 export type BugsyOptions = {
-  message: string;
-  name?: string;
-  code?: string;
-  severity?: Severity;
-  stack?: string;
-  meta?: any;
+  message?: ?string;
+  name?: ?string;
+  code?: ?string;
+  severity?: ?Severity;
+  stack?: ?string;
+  meta?: ?any;
 };
 
 export default class Bugsy extends Error {
@@ -31,31 +31,36 @@ export default class Bugsy extends Error {
     code,
     message,
     stack,
+    // $FlowFixMe
     name = 'Error',
+    // $FlowFixMe
     severity = syslog.ERROR,
+    // $FlowFixMe
     meta = {},
   }: BugsyOptions = {}) {
     super();
 
     this.code = code;
+    // $FlowFixMe
     this.severity = severity;
+    // $FlowFixMe
     this.message = message;
     this.meta = { ...meta };
 
-    if (typeof code !== 'undefined') {
+    if (code) {
       this.name = createErrorName(code);
     } else {
       this.name = name;
     }
 
-    if (typeof stack === 'undefined') {
+    if (stack) {
+      this.stack = stack;
+    } else {
       const fake = new Error(message);
       fake.name = this.name;
       const buildStack = fake.stack.split('\n');
       buildStack.splice(1, 2);
       this.stack = buildStack.join('\n');
-    } else {
-      this.stack = stack;
     }
   }
 

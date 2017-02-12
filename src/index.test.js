@@ -1,3 +1,5 @@
+/* @flow */
+
 import test from 'ava';
 import Bugsy from './Bugsy';
 import createError from './createError';
