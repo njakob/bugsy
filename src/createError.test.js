@@ -3,14 +3,14 @@
 import test from 'ava';
 import createError from './createError';
 
-test('create function', (t) => {
+test('return function', (t) => {
   const performance = createError('performance', 'High performance');
 
   t.true(typeof performance === 'function');
   t.pass();
 });
 
-test('function generate an error', (t) => {
+test('returned function generates an error', (t) => {
   const performance = createError('performance', 'High performance');
   const err = performance();
 
@@ -18,7 +18,15 @@ test('function generate an error', (t) => {
   t.pass();
 });
 
-test('generated error code', (t) => {
+test('returned function generates an error with correct message', (t) => {
+  const performance = createError('performance', 'High performance');
+  const err = performance();
+
+  t.is(err.message, 'High performance');
+  t.pass();
+});
+
+test('returned function generates an error with correct code', (t) => {
   const performance = createError('performance', 'High performance');
   const err = performance();
 
@@ -26,7 +34,7 @@ test('generated error code', (t) => {
   t.pass();
 });
 
-test('generated error name', (t) => {
+test('returned function generates an error with correct name', (t) => {
   const performance = createError('performance', 'High performance');
   const err = performance();
 
