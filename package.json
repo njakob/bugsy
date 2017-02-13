@@ -58,7 +58,7 @@
     "eslint-config-njakob": "^4.1.0",
     "eslint-plugin-flowtype": "^2.18.2",
     "eslint-plugin-import": "^2.2.0",
-    "flow-bin": "^0.37.4",
+    "flow-bin": "^0.39.0",
     "rimraf": "^2.5.4"
   },
   "ava": {
