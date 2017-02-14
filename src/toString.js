@@ -1,14 +1,14 @@
 /* @flow */
 
 import Bugsy from './Bugsy';
-import type { Severity } from './common';
+import type { ErrorLike, Severity } from './common';
 import * as syslog from './syslog';
 
 export type ToStringOptions = {
   withDate: boolean;
 };
 
-export default function toString(err: Error, {
+export default function toString(err: ErrorLike, {
   withDate = false,
 }: ToStringOptions = {}): string {
   const message: string = err.message;

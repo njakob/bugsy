@@ -1,8 +1,9 @@
 /* @flow */
 
 import Bugsy from './Bugsy';
+import type { ErrorLike } from './common';
 
-export default function convert(err: Error): Bugsy {
+export default function convert(err: ErrorLike): Bugsy {
   if (err instanceof Bugsy) {
     return err;
   }

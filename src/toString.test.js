@@ -10,6 +10,11 @@ test('stringify native error', (t) => {
   t.pass();
 });
 
+test('stringify bugsy error', (t) => {
+  t.is(toString(new Bugsy()), '[err] Error');
+  t.pass();
+});
+
 test('stringify bugsy error with severity', (t) => {
   t.is(toString(new Bugsy({ severity: syslog.ALERT })), '[alert] Error');
   t.pass();
