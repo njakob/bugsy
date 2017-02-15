@@ -38,11 +38,11 @@
     "flow": "flow check",
     "test": "ava",
     "test:watch": "ava -w",
-    "check": "npm run lint && npm run flow && npm run test",
+    "validate": "npm run lint && npm run flow && npm run test",
     "bump:major": "npm version major -m \"Bump to %s\"",
     "bump:minor": "npm version minor -m \"Bump to %s\"",
     "bump:patch": "npm version patch -m \"Bump to %s\"",
-    "prepublish": "npm run check && npm run build"
+    "prepublish": "npm run validate && npm run build"
   },
   "devDependencies": {
     "ava": "^0.18.1",
