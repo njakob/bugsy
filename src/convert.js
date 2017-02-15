@@ -1,15 +1,19 @@
 /* @flow */
 
 import Bugsy from './Bugsy';
-import type { ErrorLike } from './common';
 
-export default function convert(err: ErrorLike): Bugsy {
+export default function convert(err: any): Bugsy {
   if (err instanceof Bugsy) {
     return err;
   }
 
+  const {
+    message,
+    stack,
+  } = err;
+
   return new Bugsy({
-    message: err.message,
-    stack: err.stack,
+    message,
+    stack,
   });
 }
