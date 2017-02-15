@@ -36,7 +36,7 @@ import * as bugsy from 'bugsy';
 const RAN_AWAY = 'ran_away';
 const THROW_MISSED = 'throw_missed';
 
-const ranAway = bugsy.createDynamicError(RAN_AWAY, (name) => `${name} ran away, again`);
+const ranAway = bugsy.createDynamicError(RAN_AWAY, ({ name }) => `${name} ran away, again`);
 const throwMissed = bugsy.createError(THROW_MISSED, 'Throw totally missed');
 
 function capture(name) {
@@ -45,7 +45,7 @@ function capture(name) {
   if (r < 0.3) {
     throw throwMissed();
   } else if (r < 0.6) {
-    throw ranAway(name);
+    throw ranAway({ name });
   } else {
     throw new Error();
   }
