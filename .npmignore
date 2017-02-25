@@ -1,1 +1,8 @@
 src/
+.babelrc
+.editorconfig
+.eslintignore
+.eslintrc
+.flowconfig
+.travis.yml
+yarn.lock
