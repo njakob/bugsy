@@ -1,6 +1,7 @@
 [ignore]
 <PROJECT_ROOT>/lib/.*
 <PROJECT_ROOT>/node_modules/conventional-changelog-core/.*
+<PROJECT_ROOT>/node_modules/@njakob/parcel/.*
 
 [libs]
 

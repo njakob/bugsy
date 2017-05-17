@@ -7,7 +7,7 @@ import createDynamicError from './createDynamicError';
 import toString from './toString';
 import convert from './convert';
 import * as syslog from './syslog';
-import * as bugsy from '.';
+import * as bugsy from './bugsy';
 
 test('export Bugsy class', (t) => {
   t.truthy(bugsy.Bugsy);

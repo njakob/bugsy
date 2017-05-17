@@ -3,7 +3,6 @@
   "version": "2.2.3",
   "description": "Helper to deal with errors lifecycle in javascript",
   "author": "Nicolas Jakob <nicow.jakob@gmail.com>",
-  "main": "lib/index.js",
   "license": "MIT",
   "homepage": "https://github.com/njakob/bugsy",
   "repository": {
@@ -30,14 +29,17 @@
     "backend",
     "api"
   ],
+  "main": "lib/bugsy.js",
+  "module": "lib/bugsy.es.js",
+  "jsnext:main": "lib/bugsy.es.js",
   "scripts": {
     "clean": "rimraf lib",
     "ava:watch": "ava -w",
     "ava": "ava",
     "build:commithash": "git rev-parse HEAD > .commithash",
-    "build:source": "babel src -d lib --ignore '*.test.js' --source-maps",
-    "build:flow": "flow gen-flow-files --out-dir lib src/index.js",
-    "build": "npm run clean && npm run build:commithash && npm run build:source && npm run build:flow",
+    "build:sources": "rollup -c rollup.config.js",
+    "build:flow": "flow gen-flow-files --out-dir lib src/bugsy.js && cpr lib/bugsy.js.flow lib/bugsy.es.js.flow",
+    "build": "npm run clean && npm run build:commithash && npm run build:sources && npm run build:flow",
     "lint:fix": "eslint --fix .",
     "lint": "eslint .",
     "flow": "flow check",
@@ -45,10 +47,13 @@
     "prepublish": "npm run test && npm run build"
   },
   "devDependencies": {
+    "@njakob/hulk": "^2.0.0",
+    "@njakob/parcel": "^1.2.0",
     "ava": "^0.18.1",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.21.0",
     "babel-eslint": "^7.1.1",
+    "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-builtin-extend": "^1.1.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-flow": "^6.23.0",
@@ -59,6 +64,11 @@
     "eslint-plugin-import": "^2.2.0",
     "flow-bin": "^0.39.0",
     "rimraf": "^2.5.4",
+    "rollup": "^0.41.6",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-json": "^2.1.1",
+    "rollup-plugin-node-resolve": "^3.0.0",
     "standard-version": "^4.0.0"
   },
   "ava": {

@@ -1,10 +1,11 @@
 {
   "presets": [
-    "es2015",
     "stage-0",
+    ["es2015", { "modules": false }],
     "flow"
   ],
   "plugins": [
+    "external-helpers",
     ["babel-plugin-transform-builtin-extend", {
       "globals": ["Error"],
       "approximate": true
