@@ -1,11 +1,10 @@
 {
   "presets": [
     "es2015",
-    "stage-0"
+    "stage-0",
+    "flow"
   ],
   "plugins": [
-    "syntax-flow",
-    "transform-flow-strip-types",
     ["babel-plugin-transform-builtin-extend", {
       "globals": ["Error"],
       "approximate": true
