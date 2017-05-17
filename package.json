@@ -32,17 +32,16 @@
   ],
   "scripts": {
     "clean": "rimraf lib",
-    "build": "babel src -d lib --ignore '*.test.js' && flow gen-flow-files --out-dir lib src/index.js",
-    "lint": "eslint .",
+    "ava:watch": "ava -w",
+    "ava": "ava",
+    "build:source": "babel src -d lib --ignore '*.test.js' --source-maps",
+    "build:flow": "flow gen-flow-files --out-dir lib src/index.js",
+    "build": "npm run clean && npm run build:source && npm run build:flow",
     "lint:fix": "eslint --fix .",
+    "lint": "eslint .",
     "flow": "flow check",
-    "test": "ava",
-    "test:watch": "ava -w",
-    "validate": "npm run lint && npm run flow && npm run test",
-    "bump:major": "npm version major -m \"Bump to %s\"",
-    "bump:minor": "npm version minor -m \"Bump to %s\"",
-    "bump:patch": "npm version patch -m \"Bump to %s\"",
-    "prepublish": "npm run validate && npm run build"
+    "test": "npm run lint && npm run flow && npm run ava",
+    "prepublish": "npm run test && npm run build"
   },
   "devDependencies": {
     "ava": "^0.18.1",
