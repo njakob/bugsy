@@ -1,5 +1,5 @@
 
-# bugsy [![NPM version][npm-status-image]][npm] [![Build Status][build-status-image]][travis] [![ESLint Config][eslint-config-image]][eslint-config]
+# bugsy [![NPM version][badge:npm-status]][npm] [![Build Status][badge:build-status]][travis] [![ESLint Config][badge:eslint-config]][github:njakob/eslint-config] [![Conventional Commits][badge:conventional-commits]][conventional-commits]
 
 Helper to deal with errors lifecycle in javascript.
 
@@ -10,11 +10,10 @@ Dealing with errors is a common problem in every small or large project. While a
 * Universal module
 * Error severity
 * Custom metadata
-* Flowtype
+* Flowtype definitions
+* Source maps
 
 ## Installation
-
-[![NPM][npm-install-image]][npm]
 
 With NPM:
 
@@ -76,15 +75,21 @@ handler(() => {
 });
 ```
 
+## Changelog
+
+See [changelog][CHANGELOG].
+
 ## Licences
 
 `njakob/bugsy` is licensed under the [MIT License][licence].
 
+[changelog]: CHANGELOG.md
 [licence]: LICENSE
-[eslint-config]: https://github.com/njakob/eslint-config
 [npm]: https://nodei.co/npm/bugsy/
 [travis]: https://travis-ci.org/njakob/bugsy
-[npm-install-image]: https://nodei.co/npm/bugsy.png?downloads=true
-[npm-status-image]: https://img.shields.io/npm/v/bugsy.svg
-[build-status-image]: https://travis-ci.org/njakob/bugsy.svg?branch=master
-[eslint-config-image]: https://img.shields.io/badge/eslint_config-njakob-463fd4.svg
+[conventional-commits]: https://conventionalcommits.org
+[github:njakob/eslint-config]: https://github.com/njakob/eslint-config
+[badge:npm-status]: https://img.shields.io/npm/v/bugsy.svg
+[badge:build-status]: https://travis-ci.org/njakob/bugsy.svg?branch=master
+[badge:eslint-config]: https://img.shields.io/badge/eslint_config-njakob-463fd4.svg
+[badge:conventional-commits]: https://img.shields.io/badge/conventional%20commits-1.0.0-yellow.svg
