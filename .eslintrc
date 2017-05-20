@@ -3,6 +3,6 @@
     "njakob/es6-flow"
   ],
   "env": {
-    "browser": true
+    "node": true
   }
 }
