@@ -43,6 +43,7 @@
     "lint:fix": "eslint --fix .",
     "lint": "eslint .",
     "flow": "flow check",
+    "release": "standard-version",
     "test": "npm run lint && npm run flow && npm run ava",
     "prepublish": "npm run test && npm run build"
   },
