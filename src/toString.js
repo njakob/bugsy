@@ -1,7 +1,7 @@
 /* @flow */
 
 import Bugsy from './Bugsy';
-import type { Severity } from './common';
+import type { Severity } from './types';
 import * as syslog from './syslog';
 
 export type ToStringOptions = {

@@ -1,6 +1,6 @@
 /* @flow */
 
-import type { Severity } from './common';
+import type { Severity } from './types';
 
 export const EMERGENCY: Severity = 'emerg';
 export const ALERT: Severity = 'alert';

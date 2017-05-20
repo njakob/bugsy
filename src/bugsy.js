@@ -1,6 +1,6 @@
 /* @flow */
 
-export type { Severity } from './common';
+export type { Severity } from './types';
 export { default as Bugsy } from './Bugsy';
 export { default as toString } from './toString';
 export { default as createDynamicError } from './createDynamicError';

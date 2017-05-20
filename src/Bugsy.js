@@ -1,6 +1,6 @@
 /* @flow */
 
-import type { Severity } from './common';
+import type { Severity } from './types';
 import * as syslog from './syslog';
 
 function camelCase(value: string): string {
