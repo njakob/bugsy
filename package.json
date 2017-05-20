@@ -1,6 +1,6 @@
 {
   "name": "bugsy",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "description": "Helper to deal with errors lifecycle in javascript",
   "author": "Nicolas Jakob <nicow.jakob@gmail.com>",
   "license": "MIT",
