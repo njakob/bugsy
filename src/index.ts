@@ -1,6 +1,6 @@
 type N<T> = T | null;
 
-type Metadata = { [key: string]: unknown };
+interface Metadata { [key: string]: unknown }
 
 export interface ErrorLike {
   name: string;
@@ -12,8 +12,8 @@ export interface ErrorLike {
 }
 
 interface V8ErrorConstructor {
-  captureStackTrace?: (targetObject: Object, constructorOption?: Function) => void;
-};
+  captureStackTrace?: (target: unknown, ctor?: Function) => void;
+}
 
 const NativeError = Error as V8ErrorConstructor;
 
@@ -91,10 +91,10 @@ function find<T>(error: ErrorLike, value: T, getter: FindGetter<T>): N<ErrorLike
 }
 
 export function findCauseByName(error: ErrorLike, name: string): N<ErrorLike> {
-  return find(error, name, (innerError) => innerError.name);
+  return find(error, name, innerError => innerError.name);
 }
 
-export function findCauseBySeverity(error: ErrorLike, severity: number) {
+export function findCauseBySeverity(error: ErrorLike, severity: number): N<ErrorLike> {
   return find(error, severity, getSeverity);
 }
 

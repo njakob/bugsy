@@ -1,4 +1,4 @@
-node_modules/
 build/
+node_modules/
 *.log
 package-lock.json
