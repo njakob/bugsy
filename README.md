@@ -21,12 +21,6 @@ With NPM:
 $ npm install bugsy
 ```
 
-With Yarn:
-
-```
-$ yarn add bugsy
-```
-
 ## Usage
 
 ```javascript

@@ -1,6 +1,5 @@
 src/
-.babelrc
-.commithash
+babel.config.js
 .editorconfig
 .eslintignore
 .eslintrc
