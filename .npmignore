@@ -1,8 +1,0 @@
-src/
-babel.config.js
-.editorconfig
-.eslintignore
-.eslintrc
-.flowconfig
-.travis.yml
-yarn.lock

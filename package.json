@@ -30,6 +30,9 @@
     "api"
   ],
   "main": "main/bugsy.js",
+  "files": [
+    "build"
+  ],
   "scripts": {
     "test:lint": "eslint --ext js,ts .",
     "test": "npm run test:lint"
