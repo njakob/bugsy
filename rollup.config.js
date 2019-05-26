@@ -1,46 +1,41 @@
-import * as fs from 'fs';
-import { parseParcel } from '@njakob/parcel';
-import { hulk } from '@njakob/hulk';
-import rollupNodeResolve from 'rollup-plugin-node-resolve';
-import rollupBabel from 'rollup-plugin-babel';
-import rollupJSON from 'rollup-plugin-json';
+import resolve from 'rollup-plugin-node-resolve';
+import babel from 'rollup-plugin-babel';
 
-const pkg = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
-const parcel = parseParcel(pkg);
+const extensions = [
+  '.js', '.ts',
+];
 
-const commitHash = (() => {
-  try {
-    return fs.readFileSync('.commithash', 'utf-8').trim();
-  } catch (err) {
-    return 'unknown';
-  }
-})();
-
-const banner = hulk({
-  commitHash,
-  name: parcel.name.name,
-  version: parcel.version,
-  repository: parcel.homepage,
-});
-
-export default {
-  entry: 'src/bugsy.js',
-  sourceMap: true,
-  banner,
-  moduleName: 'bugsy',
-
-  plugins: [
-    rollupNodeResolve({
-      jsnext: true
-    }),
-    rollupJSON(),
-    rollupBabel({
-      babelrc: true,
-    }),
-  ],
-
-  targets: [
-    { dest: 'lib/bugsy.js', format: 'cjs' },
-    { dest: 'lib/bugsy.es.js', format: 'es' },
-  ]
-};
+export default [
+  {
+    input: './src/index.ts',
+    output: [
+      { file: 'build/bugsy.cjs.js', format: 'cjs' },
+      { file: 'build/bugsy.esm.js', format: 'es' },
+    ],
+    plugins: [
+      resolve({ extensions }),
+      babel({
+        extensions,
+        caller: {
+          target: 'node',
+        },
+      }),
+    ],
+  },
+  {
+    input: './src/index.ts',
+    output: [
+      { file: 'build/bugsy.browser.cjs.js', format: 'cjs' },
+      { file: 'build/bugsy.browser.esm.js', format: 'es' },
+    ],
+    plugins: [
+      resolve({ extensions }),
+      babel({
+        extensions,
+        caller: {
+          target: 'browser',
+        },
+      }),
+    ],
+  },
+];
