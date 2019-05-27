@@ -79,11 +79,11 @@ export function getFullStack(error: ErrorLike): string {
   return buf;
 }
 
-type FindGetter<T> = (error: ErrorLike) => T;
+type FindClausePredicate = (error: ErrorLike) => boolean;
 
-function find<T>(error: ErrorLike, value: T, getter: FindGetter<T>): N<ErrorLike> {
+export function findCause(error: ErrorLike, predicate: FindClausePredicate): N<ErrorLike> {
   for (let pointer = error as N<ErrorLike>; pointer !== null; pointer = getCause(pointer)) {
-    if (getter(pointer) === value) {
+    if (predicate(pointer)) {
       return pointer;
     }
   }
@@ -91,11 +91,11 @@ function find<T>(error: ErrorLike, value: T, getter: FindGetter<T>): N<ErrorLike
 }
 
 export function findCauseByName(error: ErrorLike, name: string): N<ErrorLike> {
-  return find(error, name, innerError => innerError.name);
+  return findCause(error, innerError => innerError.name === name);
 }
 
 export function findCauseBySeverity(error: ErrorLike, severity: number): N<ErrorLike> {
-  return find(error, severity, getSeverity);
+  return findCause(error, innerError => getSeverity(innerError) === severity);
 }
 
 export function matchCauseByName(error: ErrorLike, name: string): boolean {
