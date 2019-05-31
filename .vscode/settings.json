@@ -1,0 +1,15 @@
+{
+  "typescript.validate.enable": true,
+
+  "eslint.autoFixOnSave": true,
+  "eslint.provideLintTask": true,
+  "eslint.validate": [
+    "markdown",
+    "javascript",
+    "javascriptreact",
+    {"language": "typescript", "autoFix": true },
+    {"language": "typescriptreact", "autoFix": true }
+  ],
+
+  "jest.showCoverageOnLoad": true
+}

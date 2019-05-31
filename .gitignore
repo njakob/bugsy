@@ -1,5 +1,4 @@
+build/
 coverage/
 node_modules/
-lib/
-*.log
-.commithash
+package-lock.json

@@ -1,8 +1,0 @@
-{
-  "extends": [
-    "njakob/es6-flow"
-  ],
-  "env": {
-    "node": true
-  }
-}

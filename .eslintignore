@@ -1,1 +1,4 @@
-lib/
+build/
+coverage/
+node_modules/
+babel.config.js

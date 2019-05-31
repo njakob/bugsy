@@ -1,9 +1,0 @@
-src/
-.babelrc
-.commithash
-.editorconfig
-.eslintignore
-.eslintrc
-.flowconfig
-.travis.yml
-yarn.lock
