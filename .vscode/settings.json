@@ -8,5 +8,7 @@
     "javascriptreact",
     {"language": "typescript", "autoFix": true },
     {"language": "typescriptreact", "autoFix": true }
-  ]
+  ],
+
+  "jest.showCoverageOnLoad": true
 }
