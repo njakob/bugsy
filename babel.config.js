@@ -19,8 +19,12 @@ const getTarget = (caller) => {
           throw new Error(`Unknown Rollup target ${caller.target}`);
       }
     }
+    case 'babel-jest': {
+      return defineTags('node', 'jest');
+    }
+    default:
+      throw new Error(`Unexpected caller ${caller.name}`);
   }
-  throw new Error('Unexpected caller');
 }
 
 module.exports = (api) => {

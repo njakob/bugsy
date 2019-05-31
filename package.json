@@ -44,12 +44,14 @@
     "node": ">= 8.0"
   },
   "scripts": {
-    "build:clean": "rimraf lib",
+    "clean": "rimraf build",
     "build:typescript": "tsc --noEmit false --emitDeclarationOnly",
     "build:rollup": "rollup -c rollup.config.js",
-    "build": "npm run build:clean && npm run build:rollup && npm run build:typescript",
-    "test:lint": "eslint --ext js,ts .",
-    "test": "npm run test:lint"
+    "build": "npm run clean && npm run build:rollup && npm run build:typescript",
+    "lint": "eslint --ext js,ts .",
+    "pretest": "npm run build",
+    "test": "jest",
+    "prepare": "npm run clean && npm run lint && npm run test"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
@@ -57,12 +59,15 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-typescript": "^7.3.3",
     "@babel/register": "^7.4.4",
+    "@types/jest": "^24.0.13",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "babel-jest": "^24.8.0",
     "core-js": "^3.1.2",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-unicorn": "^8.0.2",
+    "jest": "^24.8.0",
     "rimraf": "^2.6.3",
     "rollup": "^1.12.3",
     "rollup-plugin-babel": "^4.3.2",

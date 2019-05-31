@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": false,
+    "types": [
+      "jest"
+    ],
+  },
+  "include": [
+    "**/*.test.ts",
+  ],
+  "exclude": []
+}

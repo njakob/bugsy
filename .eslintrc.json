@@ -7,9 +7,24 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".ts"]
+      }
+    }
+  },
   "plugins": [
     "@typescript-eslint",
     "unicorn"
+  ],
+  "overrides": [
+    {
+      "files": "**/*.test.ts",
+      "env": {
+        "jest": true
+      }
+    }
   ],
   "rules": {
     "max-len": ["error", { "code": 160 }],
