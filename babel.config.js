@@ -4,7 +4,7 @@ const defineTags = (...tags) => tags.join(';');
 
 const getTarget = (caller) => {
   if (!caller) {
-    throw new Error('Unexpected caller');
+    return defineTags('node');
   }
   switch (caller.name) {
     case '@babel/register': {
@@ -60,5 +60,15 @@ module.exports = (api) => {
       ],
       '@babel/typescript',
     ].filter(Boolean),
+    plugins: [
+      ['babel-plugin-module-resolver', {
+        root: ['./src'],
+        extensions: ['.js', '.ts'],
+        stripExtensions: ['.js'],
+        alias: {
+          'bugsy': './src/index.ts',
+        },
+      }],
+    ],
   };
 };

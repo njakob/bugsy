@@ -9,14 +9,13 @@
   },
   "settings": {
     "import/resolver": {
-      "node": {
-        "extensions": [".js", ".ts"]
-      }
+      "babel-module": {}
     }
   },
   "plugins": [
     "@typescript-eslint",
-    "unicorn"
+    "unicorn",
+    "markdown"
   ],
   "overrides": [
     {
