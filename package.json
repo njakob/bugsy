@@ -35,8 +35,8 @@
   "main": "build/bugsy.cjs.js",
   "module": "build/bugsy.esm.js",
   "browser": {
-    "build/bugsy.cjs.js": "build/bugsy.browser.cjs.js",
-    "build/bugsy.esm.js": "build/bugsy.browser.esm.js"
+    "./build/bugsy.cjs.js": "./build/bugsy.browser.cjs.js",
+    "./build/bugsy.esm.js": "./build/bugsy.browser.esm.js"
   },
   "typings": "build/index.d.ts",
   "sideEffects": false,
