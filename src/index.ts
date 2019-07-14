@@ -7,7 +7,7 @@ export interface ErrorLike {
   name: string;
   message: string;
   stack?: string;
-  cause?: Error;
+  cause?: ErrorLike;
   severity?: number;
   metadata?: Metadata;
 }
